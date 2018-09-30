@@ -2,6 +2,9 @@
 <div>
     <h1>Index Pages</h1>
     <button type="button" class="btn btn-primary" v-on:click="getLocation">周辺のお店を検索</button>
+    <p v-for="(place, key, index) in places" :key="index">
+        {{place.name}}
+    </p>
 </div>
 </template>
 
@@ -10,7 +13,8 @@
 export default {
     data: function() {
         return {
-            location: []
+            location: [],
+            places: []
         }
     },
     mounted: function() {
