@@ -1,7 +1,7 @@
 <template>
 <div>
     <h1>Index Pages</h1>
-    <button type="button" class="btn btn-primary" v-on:click="getLocation">周辺のお店を検索</button>
+    <button type="button" class="btn btn-primary" v-on:click="getPlace">周辺のお店を検索</button>
     <p v-for="(place, key, index) in places" :key="index">
         {{place.name}}
     </p>
@@ -69,6 +69,16 @@ export default {
                     }
                 }
             );
+        },
+        getPlace: function() {
+
+            const url = 'https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=' + String(gon.gurunavi_key) + '&latitude=' + String(this.location.lati) + '&longitude=' + String(this.location.long);
+
+            axios.get(url).then((response) => {
+                console.log(response);
+            }, (error) => {
+                console.log(error);
+            })
         }
     }
 }
