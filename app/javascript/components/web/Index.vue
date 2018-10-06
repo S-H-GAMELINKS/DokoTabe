@@ -12,10 +12,24 @@
 
 import axios from 'axios'
 
+function round(number, precision) {
+  var shift = function (number, precision, reverseShift) {
+    if (reverseShift) {
+      precision = -precision;
+    }  
+    var numArray = ("" + number).split("e");
+    return +(numArray[0] + "e" + (numArray[1] ? (+numArray[1] + precision) : precision));
+  };
+  return shift(Math.round(shift(number, precision, false)), precision, true);
+}
+
 export default {
     data: function() {
         return {
-            location: [],
+            location: {
+                lati: 0.0,
+                long: 0.0
+            },
             places: []
         }
     },
@@ -34,7 +48,8 @@ export default {
         getLocation: function() {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    this.location.push({ lati: position.coords.latitude, long: position.coords.longitude});
+                    this.location.lati = round(position.coords.latitude, 8);
+                    this.location.long = round(position.coords.longitude, 8);
                     console.log(this.location);
                 },
                 (error) => {
