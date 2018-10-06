@@ -76,6 +76,10 @@ export default {
 
             axios.get(url).then((response) => {
                 console.log(response);
+
+                for(var i = 0; i < response.data.rest.length; i++){
+                    this.places.push(response.data.rest[i]);
+                }
             }, (error) => {
                 console.log(error);
             })
