@@ -3,7 +3,7 @@
     <h1>Index Pages</h1>
     <button type="button" class="btn btn-primary" v-on:click="getPlace">周辺のお店を検索</button>
     <p v-for="(place, key, index) in places" :key="index">
-        {{place.name}}
+        <a :href="place.url">{{place.name}}</a>
     </p>
 </div>
 </template>
