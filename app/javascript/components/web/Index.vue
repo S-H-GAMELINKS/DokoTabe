@@ -92,6 +92,8 @@ export default {
             axios.get(url).then((response) => {
                 console.log(response);
 
+                this.places.length = 0;
+
                 for(var i = 0; i < response.data.rest.length; i++){
                     this.places.push(response.data.rest[i]);
                 }
