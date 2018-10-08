@@ -16,9 +16,4 @@ const index = new Vue({
     components: {
         'nav-bar': Header
     },
-    data: function(){
-        return {
-            message: "Hello World!"
-        }
-    }
 })
