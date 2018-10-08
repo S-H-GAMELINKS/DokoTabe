@@ -5,12 +5,27 @@
     <p v-for="(place, key, index) in places" :key="index">
         <a :href="place.url">{{place.name}}</a>
     </p>
+<GmapMap
+  :center="{lat:location.lati, lng:location.long}"
+  :zoom="7"
+  map-type-id="terrain"
+  style="width: 500px; height: 300px"
+>
+  <GmapMarker
+    :key="index"
+    v-for="(m, index) in places"
+    :position="{lat: Number(m.latitude), lng: Number(m.longitude)}"
+    :clickable="true"
+    :draggable="true"
+    @click="center={lat: Number(m.latitude), lng: Number(m.longitude)}"
+  />
+</GmapMap>
 </div>
 </template>
 
 <script>
 
-import axios from 'axios'
+import axios from 'axios'   
 
 function round(number, precision) {
   var shift = function (number, precision, reverseShift) {
