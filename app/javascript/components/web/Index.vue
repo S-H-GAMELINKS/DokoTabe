@@ -1,24 +1,21 @@
 <template>
 <div>
     <h1>Index Pages</h1>
+    <div v-if="places.length > 0">
+    <div v-for="(place, key, index) in places" :key="index">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+            <h5 class="card-title"><a :href="place.url">{{place.name}}</a></h5>
+            <p class="card-text">カテゴリ：{{place.category}}</p>
+            <p class="card-text">営業時間：{{place.opentime}}</p>
+            <p class="card-text">住所：{{place.address}}</p>
+            <p class="card-text">電話番号：{{place.tel}}</p>
+            <a :href="place.url" class="btn btn-primary">詳細情報はこちら</a>
+            </div>
+        </div>
+    </div>
+    </div>
     <button type="button" class="btn btn-primary" v-on:click="getPlace">周辺のお店を検索</button>
-    <p v-for="(place, key, index) in places" :key="index">
-        <a :href="place.url">{{place.name}}</a>
-    </p>
-<GmapMap
-  :center="{lat:location.lati, lng:location.long}"
-  :zoom="7"
-  map-type-id="terrain"
-  style="width: 500px; height: 300px"
->
-  <GmapMarker
-    :key="index"
-    v-for="(m, index) in places"
-    :position="{lat: Number(m.latitude), lng: Number(m.longitude)}"
-    :clickable="true"
-    :draggable="true"
-    @click="center={lat: Number(m.latitude), lng: Number(m.longitude)}"
-  />
 </GmapMap>
 </div>
 </template>
